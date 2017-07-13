@@ -19,7 +19,14 @@ export class AlbumService {
   }
 
   getAlbumById(albumId: string){
-    return this.database.object('albums/' + albumId);
+    return this.database.object('/albums/' + albumId);
+  }
+
+  updateAlbum(localUpdatedAlbum){
+    var albumEntryInFirebase = this.getAlbumById(localUpdatedAlbum.$key);
+    albumEntryInFirebase.update({title: localUpdatedAlbum.title,
+                                artist: localUpdatedAlbum.artist,
+                                description: localUpdatedAlbum.description});
   }
 
 }
